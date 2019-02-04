@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<title>Projet 3 - Location de vélo</title>
+	<meta charset="UTF-8">
+
+	<!--Meta-->
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="" />
+
+	<!--Stylesheet-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/MarkerCluster.css">
+	<link rel="stylesheet" href="css/MarkerCluster.Default.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+
+	<!--favicon-->
+	<link rel="icon" href="img/bicycle-15-32-260666.png" type="image/x-icon" />
+</head>
+
+<body>
+	<div id="test22">
+		<header>
+			<img src="img/banner.jpg" alt="banner">
+		</header>
+		<section id="info_site">
+			<div>
+				<h1><strong>Locacycle</strong> location de vélo à Nantes</h1>
+				<a href="#map_info">reserver</a>
+			</div>
+		</section>
+
+		<div id="section_1">
+			<div id="slider">
+				<button id="prevBtn"><span class="chevron left"></span></button>
+
+				<!-- caroussel -->
+				<div id="caroussel">
+					<!-- 1st img -->
+					<figure class="item_slider">
+						<img src="img/slider/slider1.jpg" alt="img-1" class="slide-monitor">
+						<img src="img/slider/capture(343).png" alt="img-1" class="slide-tablet">
+						<figcaption>
+							Trouvez une station en ville !
+						</figcaption>
+					</figure>
+
+					<!-- 2nd img -->
+					<figure class="item_slider">
+						<img src="img/slider/slider2.jpg" alt="img-2" class="slide-monitor">
+						<img src="img/slider/capture(344).png" alt="img-2" class="slide-tablet">
+						<figcaption>
+							Les informations de la stations sont disponnible pour valider faites reserver !
+						</figcaption>
+					</figure>
+
+					<!-- 3rd img -->
+					<figure class="item_slider">
+						<img src="img/slider/slider3.jpg" alt="img-3" class="slide-monitor">
+						<img src="img/slider/capture(347).png" alt="img-3" class="slide-tablet">
+						<figcaption>
+							Renseignez votre nom et prénom signez, c'est validé !
+						</figcaption>
+					</figure>
+
+					<!-- 4th img -->
+
+					<figure class="item_slider">
+						<img src="img/slider/slider4.jpg" alt="img-4" class="slide-monitor">
+						<img src="img/slider/capture(348).png" alt="img-4" class="slide-tablet">
+						<figcaption>
+							Vous avez ensuite 20 minutes pour récupérer votre ou vos vélos ! Good ride !
+						</figcaption>
+					</figure>
+				</div>
+				<button id="nextBtn"><span class="chevron right"></span></button>
+				<div class="button_slider">
+					<i class="fas fa-pause"></i>
+				</div>
+			</div>
+		</div>
+
+		<div id="map_info">
+			<div class="map_resa">
+				<div id="mapid"></div>
+				<div id="booking-details">
+					<p>Vélo réservé à la station : <span id="station_booked"></span> par <span id="name_booker"></span></p>
+					<p>Temps restant : <span id="time"></span></p>
+				</div>
+			</div>
+			<div id="main_panel">
+				<div id="defaut_panel">
+					<p>Cliquer sur une station pour pouvoir reserver</p>
+				</div>
+				<div id="panel_info">
+					<table>
+						<tr>
+							<th>Status de la station</th>
+							<td id="station_status" class="table_key"></td>
+
+						</tr>
+						<tr>
+							<th>Nom de la station</th>
+							<td id="station_name" class="table_key"></td>
+						</tr>
+						<tr>
+							<th>Stands disponnible</th>
+							<td id="station_stands" class="table_key"></td>
+						</tr>
+						<tr>
+							<th>Vélo disponnible </th>
+							<td id="station_bikes" class="table_key"></td>
+						</tr>
+					</table>
+					<div id="formBtn">
+						<button id="btn_panel" class="button_panel">Reserver</button>
+					</div>
+				</div>
+				<div id="panel_canvas">
+					<span id="back_state">
+						<i class="fas fa-undo"></i>
+					</span>
+					<form id="formResa">
+						<div class="fieldset">
+							<label for="lastName" id="labelNom">Nom:</label><br>
+							<input type="text" name="Nom" id="lastName" />
+						</div>
+						<div class="fieldset">
+							<label for="firstName" id="labelPrenom">Prénom:</label><br>
+							<input type="text" name="Prénom" id="firstName" />
+						</div>
+						<p>Signature:</p>
+						<canvas id="canvas"></canvas>
+						<div>
+							<span id="clearBtn" class="button_panel">Clear</span>
+							<input type="submit" value="RESERVER" id="buttonSubmit" class="button_panel" />
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+		<footer>
+			<p>Ce site est un projet d'étude . Copyright © 2019 Tous droits réservés</p>
+		</footer>
+
+		<!--Jquery-->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<!--Leaflet map-->
+		<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+		<script src="JS/leaflet.markercluster-src.js"></script>
+		<script src="JS/leaflet.markercluster.js"></script>
+		<!--Rest of the script-->
+		<script src="JS/ajax.js"></script>
+		<script src="JS/canvas.js"></script>
+		<script src="JS/map.js"></script>
+		<script src="JS/slider.js"></script>
+		<script src="JS/timer.js"></script>
+		<script src="JS/booking.js"></script>
+		<script src="JS/app.js"></script>
+	</div>
+</body>
+
+</html>
